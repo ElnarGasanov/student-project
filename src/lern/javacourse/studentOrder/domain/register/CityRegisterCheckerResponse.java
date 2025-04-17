@@ -2,7 +2,7 @@ package lern.javacourse.studentOrder.domain.register;
 
 
 
-public class CityRegisterResponse {
+public class CityRegisterCheckerResponse {
     /*
     - class CityRegisterCheckerResponse проверка ответа для CityRegisterValidator
     - private boolean existing = существует в реестре этот человек или нет

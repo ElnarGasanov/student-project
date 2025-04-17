@@ -29,6 +29,7 @@ public class StudentOrderValidator {
 
     public static void main(String[] args) {
         StudentOrderValidator sov = new StudentOrderValidator();
+        System.out.println("1. Запускаю sov.checkAll");
         sov.checkAll();
     }
 
@@ -43,6 +44,7 @@ public class StudentOrderValidator {
 
         //for-each
         for (StudentOrder so : soList){
+            System.out.println();
             checkOneOrder(so);
         }
     }

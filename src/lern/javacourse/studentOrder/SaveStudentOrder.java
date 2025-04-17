@@ -1,124 +1,100 @@
 package lern.javacourse.studentOrder;
 
-import lern.javacourse.studentOrder.dao.StudentOrderDao;
-import lern.javacourse.studentOrder.dao.StudentOrderDaoImpl;
-import lern.javacourse.studentOrder.domain.*;
+import lern.javacourse.studentOrder.domain.Address;
+import lern.javacourse.studentOrder.domain.Child;
+import lern.javacourse.studentOrder.domain.Adult;
+import lern.javacourse.studentOrder.domain.StudentOrder;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class SaveStudentOrder {
-    public static void main(String[] args) throws Exception {
-//        List<Street> d = new DictionaryDaoImpl().findStreets("Садовая");
-//        List<PassportOffice> d1 = new DictionaryDaoImpl().findPassportOffices("010010000000");
-//        List<RegisterOffice> d2 = new DictionaryDaoImpl().findRegisterOffices("010010000000");
-//        //-----
-//        List<CountryArea> co = new DictionaryDaoImpl().findAreas("");
-//        List<CountryArea> co1 = new DictionaryDaoImpl().findAreas("020000000000");
-//        List<CountryArea> co2 = new DictionaryDaoImpl().findAreas("020010000000");
-//        List<CountryArea> co3 = new DictionaryDaoImpl().findAreas("020010010000");
-//
-//        for(Street s:d) {
-//            System.out.print(s.getStreetCode() + " ");
-//            System.out.println(s.getStreetName());
-//        }
-//
-//        for(PassportOffice po:d1) {
-//            System.out.print(po.getPassportOfficeId() + ": ");
-//            System.out.print(po.getPassportOfficeAreaId() + ": ");
-//            System.out.println(po.getPassportOfficeName());
-//        }
-//
-//        for(RegisterOffice ro:d2) {
-//            System.out.print(ro.getRegisterOfficeId() + ": ");
-//            System.out.print(ro.getRegisterOfficeAreaId() + ": ");
-//            System.out.println(ro.getRegisterOfficeName());
-//        }
-//
-//        for(CountryArea ca:co) {
-//            System.out.print(ca.getAreaId() + ": ");
-//            System.out.println(ca.getAreaName());
-//        }
-//
-//        for(CountryArea ca:co1) {
-//            System.out.print(ca.getAreaId() + ": ");
-//            System.out.println(ca.getAreaName());
-//        }
-//
-//        for(CountryArea ca:co2) {
-//            System.out.print(ca.getAreaId() + ": ");
-//            System.out.println(ca.getAreaName());
-//        }
-//
-//        for(CountryArea ca:co3) {
-//            System.out.print(ca.getAreaId() + ": ");
-//            System.out.println(ca.getAreaName());
-//        }
-//        StudentOrder s = buildStudentOrder(0);
-        StudentOrderDao dao = new StudentOrderDaoImpl();
-//        Long id = dao.saveStudentOrder(s);
-//        System.out.println(id);
+    public static void main(String[] args) {
+        buildStudentOrder(10);
 
-        List<StudentOrder> soList = dao.getStudentOrders();
-        for(StudentOrder so : soList){
-            System.out.println(so.getStudentOrderId());
-        }
+        StudentOrder so = new StudentOrder();
+        long ans = saveStudentOrder(so); //внутри вызова метода нужно поместить ту переменную которую передали на вход - so
+
+        /*
+        4 типа ЦЕЛЫХ ЧИСЕЛ:
+        - первый это byte число от -128 до +127
+        - второе это short(2byte)
+        - третье это int(4byte)
+        - четвертое это long
+         */
+
+        /*
+        ВЕЩЕСТВЕННЫЕ ЧИСЛА
+        float
+        double
+         */
+
+        /*
+        СИМВОЛЫ
+        char
+         */
+
+        /*
+        ЛОГИЧЕСКАЯ ПЕРЕМЕННАЯ
+        boolean = true/false
+         */
+
+
+        buildStudentOrder(ans);
     }
 
     static long saveStudentOrder(StudentOrder studentOrder) {
+         /*
+        В методе есть 3 составных части:
+        ИМЯ МЕТОДА - saveStudentOrder
+        ВОЗВРАЩАЕМОЕ ЗНАЧЕНИЕ - long, но может быть и объект
+        ВХОДНЫЕ ПАРАМЕТРЫ - (StudentOrder studentOrder),
+            на вход метода передача данных (StudentOrder studentOrder)
+                тип данных которые принимаем - StudentOrder
+                и работать с данными через имя - studentOrder
+         */
+
         return 0;
     }
 
     public static StudentOrder buildStudentOrder(long id) {
         StudentOrder so = new StudentOrder();
         so.setStudentOrderId(id);
+        so.getMarriageCertificateId("" + (1234560000 + id));
         so.setMarriageDate(LocalDate.of(2016, 7, 4));
-        RegisterOffice ro = new RegisterOffice(1L, "", "");
-        so.setMarriageOffice(ro);
+        so.setMarriageOffice("Отделение ЗАГС");
 
-        Street street = new Street(1L, "FirstStreet");
-        Address address = new Address("195000", street, "12", "", "142");
+        Address address = new Address("195000", "Заневский пр.", "12", "", "142");
 
         //МУЖ
         Adult husband = new Adult("Петров", "Виктор", "Сергеевич", LocalDate.of(1998, 8, 24));
         husband.setPassportSeria("" + (1000 + id));
         husband.setPassportNumber("" + (100000 + id));
         husband.setIssueDate(LocalDate.of(2017, 9, 15));
-        PassportOffice po1 = new PassportOffice(1L, "", "");
-        husband.setIssueDepartment(po1);
+        husband.setIssueDepartment("Отдел Милиции №" + id);
         husband.setStudentId("" + (1000000 + id));
         husband.setAddress(address);
-        husband.setUniversity(new University(1L, ""));
 
         //ЖЕНА
-        Adult wife = new Adult("Педрова", "Вероника", "Алексеевна", LocalDate.of(1998, 3, 12));
+        Adult wife = new Adult("Петрова", "Вероника", "Алексеевна", LocalDate.of(1998, 3, 12));
         wife.setPassportSeria("" + (2000 + id));
         wife.setPassportNumber("" + (200000 + id));
         wife.setIssueDate(LocalDate.of(2018, 4, 5));
-        PassportOffice po2 = new PassportOffice(2L, "", "");
-        wife.setIssueDepartment(po2);
+        wife.setIssueDepartment("Отдел Милиции №" + id);
         wife.setStudentId("" + (2000000 + id));
         wife.setAddress(address);
-        wife.setUniversity(new University(1L, ""));;
 
         //РЕБЕНОК1
         Child child1 = new Child("Петрова", "Ирина", "Викторовна", LocalDate.of(2018, 6, 29));
         child1.setCertificateNumber("" + (30000 + id));
         child1.setIssueDate(LocalDate.of(2018, 7, 19));
-        RegisterOffice ro1 = new RegisterOffice(2L, "", "");
-        child1.setIssueDepartment(ro1);
+        child1.setIssueDepartment("Отдел ЗАГС №" + id);
         child1.setAddress(address);
-
         //РЕБЕНОК2
         Child child2 = new Child("Петров", "Олег", "Викторович", LocalDate.of(2019, 8, 23));
         child2.setCertificateNumber("" + (40000 + id));
         child2.setIssueDate(LocalDate.of(2019, 9, 19));
-        RegisterOffice ro2 = new RegisterOffice(3L, "", "");
-        child2.setIssueDepartment(ro2);
+        child2.setIssueDepartment("Отдел ЗАГС №" + id);
         child2.setAddress(address);
-
-        so.setMarriageCertificateId("22032" + id);
-        so.setMarriageDate(LocalDate.of(2020, 8, 10));
 
         so.setHusband(husband);
         so.setWife(wife);
@@ -126,5 +102,9 @@ public class SaveStudentOrder {
         so.addChild(child2);
 
         return so;
+    }
+
+    static void printStudentOrder(StudentOrder stOr) {
+        System.out.println(stOr.getStudentOrderId());
     }
 }
