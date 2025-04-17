@@ -1,13 +1,15 @@
 package lern.javacourse.studentOrder.validator.register;
 
-import lern.javacourse.studentOrder.domain.register.CityRegisterCheckerResponse;
+import lern.javacourse.studentOrder.domain.register.CityRegisterResponse;
 import lern.javacourse.studentOrder.domain.Person;
 import lern.javacourse.studentOrder.exception.CityRegisterException;
+import lern.javacourse.studentOrder.exception.TransportException;
 
 public class RealCityRegisterChecker implements CityRegisterChecker {
 
     @Override
-    public CityRegisterCheckerResponse checkPerson(Person person) throws CityRegisterException {
+    public CityRegisterResponse checkPerson(Person person)
+            throws CityRegisterException, TransportException {
         return null;
     }
 }

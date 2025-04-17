@@ -6,8 +6,8 @@ public class Adult extends Person {
     private String passportSeria;
     private String passportNumber;
     private LocalDate issueDate;
-    private String issueDepartment;
-    private String university;
+    private PassportOffice issueDepartment;
+    private University university;
     private String studentId;
 
     public Adult(String surName, String givenName, String patronymic, LocalDate dateOfBirth) {
@@ -16,17 +16,14 @@ public class Adult extends Person {
 
     public Adult(){
         super();
-
     }
 
+    public University getUniversity() {
+        return university;
+    }
 
-//    @Override
-//    public String getPersonString() {
-//        return surName + " " + givenName + ":" + passportNumber;
-//    }
-
-    public String getSurName() {
-        return "";
+    public void setUniversity(University university) {
+        this.university = university;
     }
 
     public String getPassportSeria() {
@@ -53,20 +50,12 @@ public class Adult extends Person {
         this.issueDate = issueDate;
     }
 
-    public String getIssueDepartment() {
+    public PassportOffice getIssueDepartment() {
         return issueDepartment;
     }
 
-    public void setIssueDepartment(String issueDepartment) {
+    public void setIssueDepartment(PassportOffice issueDepartment) {
         this.issueDepartment = issueDepartment;
-    }
-
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
     }
 
     public String getStudentId() {
