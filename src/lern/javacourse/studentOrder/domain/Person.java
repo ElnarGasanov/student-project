@@ -16,9 +16,7 @@ public abstract class Person extends Object{
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Person() {
-
-    }
+    public Person() {}
 
     public String getSurName() {
         return surName;
