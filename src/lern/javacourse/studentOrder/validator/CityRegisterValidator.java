@@ -1,15 +1,15 @@
 package lern.javacourse.studentOrder.validator;
 
 import lern.javacourse.studentOrder.domain.Child;
-import lern.javacourse.studentOrder.domain.Person;
 import lern.javacourse.studentOrder.domain.register.AnswerCityRegister;
-import lern.javacourse.studentOrder.domain.register.AnswerCityRegisterItem;
-import lern.javacourse.studentOrder.domain.register.CityRegisterResponse;
+import lern.javacourse.studentOrder.domain.register.CityRegisterCheckerResponse;
 import lern.javacourse.studentOrder.domain.StudentOrder;
 import lern.javacourse.studentOrder.exception.CityRegisterException;
-import lern.javacourse.studentOrder.exception.TransportException;
 import lern.javacourse.studentOrder.validator.register.CityRegisterChecker;
 import lern.javacourse.studentOrder.validator.register.FakeCityRegisterChecker;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class CityRegisterValidator {
     public String hostName;
@@ -23,19 +23,16 @@ public class CityRegisterValidator {
     /*
     В конструкторе присвоили personChecker значение(создали объект)
      */
-    public CityRegisterValidator() {
+    public CityRegisterValidator(){
         personChecker = new FakeCityRegisterChecker();
     }
 
     public AnswerCityRegister checkCityRegister(StudentOrder so) {
+        try {
+            CityRegisterCheckerResponse hans = personChecker.checkPerson(so.getHusband());
+            CityRegisterCheckerResponse wans = personChecker.checkPerson(so.getWife());
 
-        AnswerCityRegister ans = new AnswerCityRegister();
-
-        ans.addItem(checkPerson(so.getHusband()));
-        ans.addItem(checkPerson(so.getWife()));
-        for (Child child : so.getChildren()) {
-            ans.addItem(checkPerson(child));
-        }
+            List<Child> children = so.getChildren();
 
             /*
             Проходимся по списку с помощью цикла for:
@@ -62,33 +59,16 @@ public class CityRegisterValidator {
             }
              */
 
-        return ans;
-    }
+            for(Child child : children) {
+                CityRegisterCheckerResponse cans = personChecker.checkPerson(child);
+            }
 
-    private AnswerCityRegisterItem checkPerson(Person person) {
-
-        AnswerCityRegisterItem.CityStatus status = null;
-        AnswerCityRegisterItem.CityError error = null;
-        try {
-            CityRegisterResponse tmp = personChecker.checkPerson(person);
-            status = tmp.isExisting() ?
-                    AnswerCityRegisterItem.CityStatus.YES :
-                    AnswerCityRegisterItem.CityStatus.NO;
         } catch (CityRegisterException ex) {
             ex.printStackTrace(System.out);
-            status = AnswerCityRegisterItem.CityStatus.ERROR;
-            error = new AnswerCityRegisterItem.CityError(ex.getCode(), ex.getMessage());
-        } catch (TransportException ex) {
-            ex.printStackTrace(System.out);
-            status = AnswerCityRegisterItem.CityStatus.ERROR;
-            error = new AnswerCityRegisterItem.CityError("NO_GRN", ex.getMessage());
-        } catch (Exception ex) {
-            ex.printStackTrace(System.out);
-            status = AnswerCityRegisterItem.CityStatus.ERROR;
-            error = new AnswerCityRegisterItem.CityError("NO_GRN", ex.getMessage());
         }
 
-        AnswerCityRegisterItem ans = new AnswerCityRegisterItem(status, person, error);
+
+        AnswerCityRegister ans = new AnswerCityRegister();
         return ans;
     }
 }

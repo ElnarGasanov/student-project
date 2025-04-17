@@ -2,29 +2,17 @@ package lern.javacourse.studentOrder.domain;
 
 public class Address {
     private String city;
-    private Street street;
+    private String street;
     private String building;
-    private String apartment;
+    private String appartment;
     private String postCode;
-    private String extension;
 
-    public Address(String postCode, Street street, String building, String city, String apartment) {
+    public Address(String postCode, String street, String building, String city, String appartment) {
         this.postCode = postCode;
         this.street = street;
         this.building = building;
         this.city = city;
-        this.apartment = apartment;
-    }
-
-    public Address() {
-    }
-
-    public String getExtension() {
-        return extension;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
+        this.appartment = appartment;
     }
 
     public String getCity() {
@@ -35,11 +23,11 @@ public class Address {
         this.city = city;
     }
 
-    public Street getStreet() {
+    public String getStreet() {
         return street;
     }
 
-    public void setStreet(Street street) {
+    public void setStreet(String street) {
         this.street = street;
     }
 
@@ -51,12 +39,12 @@ public class Address {
         this.building = building;
     }
 
-    public String getApartment() {
-        return apartment;
+    public String getAppartment() {
+        return appartment;
     }
 
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
+    public void setAppartment(String appartment) {
+        this.appartment = appartment;
     }
 
     public String getPostCode() {

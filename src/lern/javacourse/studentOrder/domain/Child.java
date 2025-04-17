@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Child extends Person {
     private String certificateNumber;
     private LocalDate issueDate;
-    private RegisterOffice issueDepartment;
+    private String issueDepartment;
 
     public Child(String surName, String givenName, String patronymic, LocalDate dateOfBirth) {
         super(surName, givenName, patronymic, dateOfBirth);
@@ -28,11 +28,11 @@ public class Child extends Person {
         this.issueDate = issueDate;
     }
 
-    public RegisterOffice getIssueDepartment() {
+    public String getIssueDepartment() {
         return issueDepartment;
     }
 
-    public void setIssueDepartment(RegisterOffice issueDepartment) {
+    public void setIssueDepartment(String issueDepartment) {
         this.issueDepartment = issueDepartment;
     }
 }
